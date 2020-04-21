@@ -1,9 +1,12 @@
 api = "0.2"
 
 [buildpack]
-id = "heroku/nodejs-yarn"
+id = "nanzhong/nodejs-yarn"
 version = "0.0.1"
 name = "Yarn Buildpack"
+
+[[stacks]]
+id = "io.buildpacks.stacks.bionic"
 
 [[stacks]]
 id = "heroku-18"
