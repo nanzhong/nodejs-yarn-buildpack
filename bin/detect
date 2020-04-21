@@ -4,6 +4,7 @@ set -eo pipefail
 
 bp_dir=$(cd "$(dirname "$0")"/..; pwd)
 build_dir=$(pwd)
+buildpack=$(rq -tJ < "$bp_dir/buildpack.toml" | jq -r '"\(.buildpack.id)@\(.buildpack.version)"')
 
 # shellcheck source=/dev/null
 source "$bp_dir/lib/detect.sh"
@@ -11,3 +12,5 @@ source "$bp_dir/lib/detect.sh"
 if ! detect_yarn_lock "$build_dir" ; then
   exit 100
 fi
+
+write_detect_toml "$build_dir/package.json" "$build_dir/.appsail/detect/$buildpack.toml"
